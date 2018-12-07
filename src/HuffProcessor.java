@@ -63,6 +63,8 @@ public class HuffProcessor {
 	}
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
 		
+		out.writeBits(BITS_PER_INT, HUFF_TREE);
+		
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
 			
@@ -128,6 +130,8 @@ public class HuffProcessor {
 		if(myDebugLevel >= DEBUG_HIGH) {
 			System.out.printf("pq created with %d nodes \n", pq.size());
 		}
+		
+		if(!pq.contains(new HuffNode(PSEUDO_EOF, 1, null, null))) pq.add(new HuffNode(PSEUDO_EOF, 1, null, null));
 		
 		while(pq.size() > 1) {
 			HuffNode left = pq.remove();
