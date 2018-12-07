@@ -101,6 +101,11 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		if(root.myLeft==null && root.myRight==null) {
 			encodings[root.myValue] = path;
+			
+			if(myDebugLevel >= DEBUG_HIGH) {
+				System.out.printf("encoding for %d is %s \n", root.myValue, path);
+			}
+			return;
 		}
 		else {
 			codingHelper(root.myLeft, path + "0", encodings);
@@ -120,11 +125,15 @@ public class HuffProcessor {
 			}
 		}
 		
+		if(myDebugLevel >= DEBUG_HIGH) {
+			System.out.printf("pq created with %d nodes \n", pq.size());
+		}
+		
 		while(pq.size() > 1) {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
 			
-			HuffNode t = new HuffNode(left.myWeight+right.myWeight, left.myWeight+right.myWeight, left, right);
+			HuffNode t = new HuffNode(0, left.myWeight+right.myWeight, left, right);
 			pq.add(t);
 		}
 		
@@ -148,7 +157,7 @@ public class HuffProcessor {
 		if (val == -1) break;
 		
 		// If val != -1, then increment freq in array by 1.
-		freq[val] = freq[val] + 1;
+		else freq[val] = freq[val] + 1;
 		
 		}
 		freq[PSEUDO_EOF] = 1;
@@ -243,5 +252,8 @@ public class HuffProcessor {
 
 	}
 
+	public static void main(String[] args) {
+		
+	}
 	
 }
