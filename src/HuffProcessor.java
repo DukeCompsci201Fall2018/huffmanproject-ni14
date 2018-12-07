@@ -62,9 +62,7 @@ public class HuffProcessor {
 		out.close();
 	}
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
-		
-		out.writeBits(BITS_PER_INT, HUFF_TREE);
-		
+				
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
 			
@@ -85,7 +83,7 @@ public class HuffProcessor {
 			out.writeBits(BITS_PER_WORD + 1, 1 + root.myValue);
 		}
 		else {
-			out.writeBits(BITS_PER_WORD + 1, 0);
+			out.writeBits(1, 0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
 		}
