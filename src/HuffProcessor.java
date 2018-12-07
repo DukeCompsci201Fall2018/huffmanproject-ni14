@@ -75,9 +75,6 @@ public class HuffProcessor {
 				out.writeBits(code.length(), Integer.parseInt(code, 2));
 			}
 		}
-		
-		out.close();
-
 	}
 
 	private void writeHeader(HuffNode root, BitOutputStream out) {
@@ -191,7 +188,7 @@ public class HuffProcessor {
 	}
 
 
-	public HuffNode readTreeHeader(BitInputStream in){
+	private HuffNode readTreeHeader(BitInputStream in){
 
 		int bit = in.readBits(1);
 		if (bit == -1){
@@ -210,7 +207,7 @@ public class HuffProcessor {
 
 	}
 
-	public void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out){
+	private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out){
 
 		HuffNode current = root;
 
